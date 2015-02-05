@@ -227,7 +227,9 @@ visitReactTag.test = function(object, path, state) {
   if (object.type === Syntax.XJSElement) {
     var openingElement = object.openingElement;
     var nameObject = openingElement.name;
-    return nameObject.type === Syntax.XJSIdentifier && nameObject.name === "$_";
+    return nameObject.type === Syntax.XJSIdentifier && (
+            nameObject.name === "$_" ||
+            nameObject.name === "$i18nDoNotTranslate");
   }
 };
 
