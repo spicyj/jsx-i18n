@@ -68,7 +68,7 @@ function visitReactTag(traverse, object, path, state) {
 
   // if we don't have any attributes, pass in null
   if (hasAtLeastOneSpreadProperty) {
-    utils.append('Object.assign({', state);
+    utils.append('React.__spread({', state);
   } else if (hasAttributes) {
     utils.append('{', state);
   } else {
@@ -227,7 +227,9 @@ visitReactTag.test = function(object, path, state) {
   if (object.type === Syntax.XJSElement) {
     var openingElement = object.openingElement;
     var nameObject = openingElement.name;
-    return nameObject.type === Syntax.XJSIdentifier && nameObject.name === "$_";
+    return nameObject.type === Syntax.XJSIdentifier && (
+            nameObject.name === "$_" ||
+            nameObject.name === "$i18nDoNotTranslate");
   }
 };
 
